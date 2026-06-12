@@ -258,7 +258,38 @@ Deferred: arrow-key navigation between cards/columns; new-column shortcut.
 
 ---
 
-## 8. Open Items / Assumptions to Confirm
+## 8. Definition of Done
+
+A feature is **done only when its acceptance criteria are validated against a
+live, running build of the app** — not against unit logic, mocks, or a passing
+compile alone.
+
+**Done requires all of the following:**
+
+1. **Live validation of every AC.** Each acceptance criterion in §7 is exercised
+   on an actual running build (`.app` launched on macOS 26) and observed to hold.
+   No AC is considered met by reasoning or by lower-level tests alone.
+2. **Automated UI validation.** Behavioral ACs are covered by **XCUITest** cases
+   that launch the real app and assert on real UI, run headless via
+   `xcodebuild test`. Logic-level ACs (data model, bulk ops, archive/restore,
+   overdue, delete-block rules) are covered by **XCTest**. Every AC maps to at
+   least one automated test.
+3. **Visual validation.** Appearance ACs (AC-A1, AC-A2, AC-C3, AC-K2, AC-K3) are
+   confirmed by screenshot of the running app — including light **and** dark mode,
+   and the 3-columns-at-half-screen layout — captured with realistic seeded data.
+4. **Gates green.** Format, lint, build, and the full test suite pass on every
+   change (automated gates always on).
+5. **Accessibility identifiers present.** Views expose the identifiers their
+   XCUITests rely on; these are added as features are built, not retrofitted.
+6. **Traceability.** A checklist maps each AC → the test(s)/screenshot that
+   validate it, so 100% AC coverage is demonstrable, not asserted.
+
+Done = **100% of §7 acceptance criteria validated live**, with the evidence
+(tests + screenshots) recorded.
+
+---
+
+## 9. Open Items / Assumptions to Confirm
 
 - **App name** — working title "Kanban"; final name TBD.
 - **Tag palette** — exact color set to be finalized during design.
